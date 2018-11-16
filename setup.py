@@ -6,5 +6,6 @@ setup(name='django-exercise',
       install_requires=[
           'psycopg2-2.7.6.1',
           'Django-2.1.3',
+          'requests-2.20.1',
     ],
 )

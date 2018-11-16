@@ -1,0 +1,11 @@
+{% if menu %}
+    <ul>
+    {% for item in menu %}
+        <li>
+            {{item}}
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No Menu available.</p>
+{% endif %}

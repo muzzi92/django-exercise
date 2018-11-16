@@ -1,6 +1,7 @@
 from django.db import models
-
+import requests
 # Create your models here.
+
 
 class Orders(models.Model):
     table_number = models.IntegerField()
@@ -9,3 +10,18 @@ class Orders(models.Model):
 
     def __str__(self):
         return self.item
+
+
+class Restaurant:
+
+    def __init__(self, url):
+        self.information = requests.get(url).json()
+
+    def menu(self):
+        menu_list = []
+        item_categories =  self.information["categories"]
+        for category in item_categories:
+            items = category["menu-items"]
+            for item in items:
+                menu_list.append(item["name"])
+        return menu_list
