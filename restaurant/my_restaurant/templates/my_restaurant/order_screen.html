@@ -1,0 +1,16 @@
+<h1> Order Screen </h1>
+<ul>
+{% for order in orders %}
+    <li>
+        <span>
+            table number: {{order.table_number}} ||
+            {{order.item}} ||
+            {% if order.complete %}
+                Ready to collect
+            {% else %}
+                Still cooking.
+            {% endif %}
+        </span>
+    </li>
+</ul>
+{% endfor %}

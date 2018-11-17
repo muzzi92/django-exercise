@@ -23,5 +23,5 @@ class Restaurant:
         for category in item_categories:
             items = category["menu-items"]
             for item in items:
-                menu_list.append(f"{item['name']} - ₹{item['sub-items'][0]['price']}")
+                menu_list.append(f"{item['name']}")
         return menu_list

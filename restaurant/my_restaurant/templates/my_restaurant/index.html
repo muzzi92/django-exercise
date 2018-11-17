@@ -1,6 +1,10 @@
 <h1>{{ restaurant_name }}</h1>
 
 <form action="{% url 'order' %}" method="post">
+    <label for="table_num">Please enter table number: </label>
+    <input type="text" id="table_num" name="table_number">
+    <br>
+    <p>Make selections: </p>
     {% csrf_token %}
     {% for item in menu %}
         <input type="checkbox" name="choice[]" id="choice{{forloop.counter}}" value="{{item}}">
