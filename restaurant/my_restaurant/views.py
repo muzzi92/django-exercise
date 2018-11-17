@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
 import requests
 
 from .models import Orders, Restaurant
@@ -12,6 +13,7 @@ def index(request):
     }
     return render(request, 'my_restaurant/index.html', context)
 
-def order(request, order_id):
-    order_name = Orders.objects.get(pk=1).item
-    return HttpResponse(f"Order {order_id} was for {order_name}")
+def order(request):
+    choice = Orders(item=request.POST['choice'], table_number=1)
+    choice.save()
+    return HttpResponseRedirect(reverse('index'))

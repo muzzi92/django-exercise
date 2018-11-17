@@ -1,11 +1,8 @@
-{% if menu %}
-    <ul>
+<form action="{% url 'order' %}" method="post">
+    {% csrf_token %}
     {% for item in menu %}
-        <li>
-            {{item}}
-        </li>
+        <input type="radio" name="choice" id="choice{{forloop.counter}}" value="{{item}}">
+        <label for="choice{{ forloop.counter }}">{{item}}</label><br>
     {% endfor %}
-    </ul>
-{% else %}
-    <p>No Menu available.</p>
-{% endif %}
+    <input type="submit" value="Order">
+</form>

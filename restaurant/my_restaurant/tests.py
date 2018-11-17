@@ -8,8 +8,8 @@ import requests_mock
 class TestRestaurantApi(TestCase):
 
     def test_stores_api_object_as_attribute(self):
-        with requests_mock.mock() as m:
-            m.get("https://api.myjson.com/bins/19vode/", json={"foo": "bar"})
+        with requests_mock.mock() as requests:
+            requests.get("https://api.myjson.com/bins/19vode/", json={"foo": "bar"})
             nandos = Restaurant("https://api.myjson.com/bins/19vode/")
             self.assertEqual(nandos.information, {"foo": "bar"})
 
