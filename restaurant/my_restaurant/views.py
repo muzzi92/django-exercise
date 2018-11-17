@@ -7,13 +7,15 @@ from .models import Orders, Restaurant
 
 # Create your views here.
 def index(request):
-    nandos = Restaurant("https://api.myjson.com/bins/19vode/")
+    restaurant = Restaurant("https://api.myjson.com/bins/19vode/")
     context = {
-        'menu': nandos.menu()
+        "menu": restaurant.menu(),
+        "restaurant_name": restaurant.information["restaurant-info"]["name"],
     }
-    return render(request, 'my_restaurant/index.html', context)
+    return render(request, "my_restaurant/index.html", context)
 
 def order(request):
-    choice = Orders(item=request.POST['choice'], table_number=1)
-    choice.save()
-    return HttpResponseRedirect(reverse('index'))
+    for order in request.POST.getlist("choice[]"):
+        choice = Orders(item=order, table_number=1)
+        choice.save()
+    return HttpResponseRedirect(reverse("index"))

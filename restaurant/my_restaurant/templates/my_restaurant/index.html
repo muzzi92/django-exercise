@@ -1,7 +1,9 @@
+<h1>{{ restaurant_name }}</h1>
+
 <form action="{% url 'order' %}" method="post">
     {% csrf_token %}
     {% for item in menu %}
-        <input type="radio" name="choice" id="choice{{forloop.counter}}" value="{{item}}">
+        <input type="checkbox" name="choice[]" id="choice{{forloop.counter}}" value="{{item}}">
         <label for="choice{{ forloop.counter }}">{{item}}</label><br>
     {% endfor %}
     <input type="submit" value="Order">
