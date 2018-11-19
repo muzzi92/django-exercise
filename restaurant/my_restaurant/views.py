@@ -1,41 +1,11 @@
-from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
-from django.urls import reverse
-import requests
+from rest_framework import viewsets
 
-from .models import Orders, Restaurant
+from .models import Orders
+from .serializers import OrdersSerializer
 
 # Create your views here.
-def index(request):
-    restaurant = Restaurant("https://api.myjson.com/bins/19vode/")
-    context = {
-        "menu": restaurant.menu(),
-        "restaurant_name": restaurant.information["restaurant-info"]["name"],
-    }
-    return render(request, "my_restaurant/index.html", context)
 
-def order(request):
-    table_number = int(request.POST["table_number"])
-    for order in request.POST.getlist("choice[]"):
-        choice = Orders(item=order, table_number=table_number)
-        choice.save()
-    return HttpResponseRedirect(reverse("screen"))
 
-def screen(request):
-    orders = Orders.objects.all()
-    context = {
-        "orders": orders,
-    }
-    return render(request, "my_restaurant/order_screen.html", context)
-
-def complete(request):
-    order_number = request.POST["complete_order"]
-    order = Orders.objects.get(pk=order_number)
-    order.complete = True
-    order.save()
-    return HttpResponseRedirect(reverse("screen"))
-
-def delete(request):
-    order_number = request.POST["delete_order"]
-    Orders.objects.filter(pk=order_number).delete()
-    return HttpResponseRedirect(reverse("screen"))
+class OrdersViewSet(viewsets.ModelViewSet):
+    queryset = Orders.objects.all()
+    serializer_class = OrdersSerializer
