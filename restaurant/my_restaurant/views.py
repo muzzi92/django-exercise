@@ -27,3 +27,15 @@ def screen(request):
         "orders": orders,
     }
     return render(request, "my_restaurant/order_screen.html", context)
+
+def complete(request):
+    order_number = request.POST["complete_order"]
+    order = Orders.objects.get(pk=order_number)
+    order.complete = True
+    order.save()
+    return HttpResponseRedirect(reverse("screen"))
+
+def delete(request):
+    order_number = request.POST["delete_order"]
+    Orders.objects.filter(pk=order_number).delete()
+    return HttpResponseRedirect(reverse("screen"))

@@ -2,15 +2,21 @@
 <ul>
 {% for order in orders %}
     <li>
-        <span>
-            table number: {{order.table_number}} ||
-            {{order.item}} ||
-            {% if order.complete %}
-                Ready to collect
-            {% else %}
-                Still cooking.
-            {% endif %}
-        </span>
+        table number: {{order.table_number}} ||
+        {{order.item}} ||
+        {% if order.complete %}
+            Ready to collect
+        {% else %}
+            Still cooking
+        {% endif %}
+        <form action="{% url 'complete' %}" method="post">
+            {% csrf_token %}
+            <button name="complete_order" value="{{order.id}}"> Click to Complete </button>
+        </form>
+        <form action="{% url 'delete' %}" method="post">
+            {% csrf_token %}
+            <button name="delete_order" value="{{order.id}}"> Delete Order </button>
+        </form>
     </li>
 </ul>
 {% endfor %}
