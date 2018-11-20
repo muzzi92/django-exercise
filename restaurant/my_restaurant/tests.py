@@ -1,4 +1,5 @@
 from django.test import TestCase, Client
+from django.core.exceptions import ObjectDoesNotExist
 from .models import Orders
 from . serializers import OrdersSerializer
 
@@ -19,3 +20,7 @@ class TestRestaurantApi(TestCase):
         serializer = OrdersSerializer(orders, many=True)
 
         self.assertEqual(response.data, serializer.data)
+
+    def test_delete_single_order(self):
+        response = self.client.delete("http://127.0.0.1:8000/orders/1/")
+        self.assertRaises(ObjectDoesNotExist, Orders.objects.get, id=1)
