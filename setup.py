@@ -7,5 +7,6 @@ setup(name='django-exercise',
           'psycopg2-2.7.6.1',
           'Django-2.1.3',
           'requests-2.20.1',
+          'djangorestframework-3.9.0',
     ],
 )
