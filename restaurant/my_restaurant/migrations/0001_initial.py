@@ -7,18 +7,25 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Orders',
+            name="Orders",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('_id', models.IntegerField()),
-                ('table_number', models.IntegerField()),
-                ('item', models.CharField(max_length=200)),
-                ('complete', models.BooleanField()),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("_id", models.IntegerField()),
+                ("table_number", models.IntegerField()),
+                ("item", models.CharField(max_length=200)),
+                ("complete", models.BooleanField()),
             ],
-        ),
+        )
     ]

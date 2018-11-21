@@ -5,13 +5,6 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('my_restaurant', '0001_initial'),
-    ]
+    dependencies = [("my_restaurant", "0001_initial")]
 
-    operations = [
-        migrations.RemoveField(
-            model_name='orders',
-            name='_id',
-        ),
-    ]
+    operations = [migrations.RemoveField(model_name="orders", name="_id")]
